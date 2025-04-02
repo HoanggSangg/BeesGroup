@@ -1,0 +1,94 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 18px;
+    text-align: left;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+  
+thead {
+    background-color: #007bff;
+    color: white;
+}
+  
+th, td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+}
+  
+tbody tr:hover {
+    background-color: #f1f1f1;
+}
+  
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+  
+a {
+    color: #007bff;
+    text-decoration: none;
+}
+  
+a:hover {
+    text-decoration: underline;
+}
+  
+button {
+    min-width: 55px;
+    margin: 0 2px;
+    padding: 4px 0;
+    border-radius: 5px;
+    transition: 0.2s;
+    cursor: pointer;
+}
+  
+button:hover {
+    opacity: 0.8;
+    background-color: #007bff;
+    color: #f1f1f1;
+}
+
+.page-button {
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    background-color: #ddd;
+    color: black;
+    border: none;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .page-button.active {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .page-button:hover {
+    background-color: #0056b3;
+    color: white;
+  }
+  
+.sort-button {
+    min-width: 30px;
+    margin-left: 5px;
+    padding: 2px 5px;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+    font-size: 14px;
+}
+
+.sort-button:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+.sort-button.active {
+    background-color: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.8);
+}
+  
+  

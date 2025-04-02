@@ -15,6 +15,12 @@ const formatBalance = (balance: number) =>
 type SortField = 'name' | 'balance';
 type SortDirection = 'asc' | 'desc';
 
+const LoadingSpinner: React.FC = () => (
+    <div className="loading-spinner">
+        <div className="spinner"></div>
+    </div>
+);
+
 const UsersTable: React.FC = () => {
     const [users, setUsers] = useState<TUser[]>([]);
     const [loading, setLoading] = useState(true);
@@ -22,7 +28,16 @@ const UsersTable: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortField, setSortField] = useState<SortField>('name');
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+    const [isDarkMode, setIsDarkMode] = useState(() => {
+        const savedTheme = localStorage.getItem('theme');
+        return savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    });
     const usersPerPage = 10;
+
+    useEffect(() => {
+        document.documentElement.setAttribute('data-theme', isDarkMode ? 'dark' : 'light');
+        localStorage.setItem('theme', isDarkMode ? 'dark' : 'light');
+    }, [isDarkMode]);
 
     useEffect(() => {
         const fakeUsers: TUser[] = Array.from({ length: 100 }, (_, i) => ({
@@ -33,8 +48,6 @@ const UsersTable: React.FC = () => {
             registerAt: new Date(),
             active: Math.random() > 0.5,
         }));
-
-        console.log(fakeUsers);
 
         setTimeout(() => {
             setUsers(fakeUsers);
@@ -74,7 +87,10 @@ const UsersTable: React.FC = () => {
         setUsers(sortedUsers);
     };
 
-    if (loading) return <p>Loading...</p>;
+    const toggleTheme = () => {
+        setIsDarkMode(prev => !prev);
+    };
+
     if (error) return <p>Error: {error}</p>;
 
     const totalPages = Math.ceil(users.length / usersPerPage);
@@ -101,7 +117,12 @@ const UsersTable: React.FC = () => {
     };
 
     return (
-        <div>
+        <div style={{ position: 'relative' }}>
+            {loading && (
+                <div className="loading-overlay">
+                    <LoadingSpinner />
+                </div>
+            )}
             <table>
                 <thead>
                     <tr>
@@ -127,6 +148,11 @@ const UsersTable: React.FC = () => {
                         <th>Register Date</th>
                         <th>Status</th>
                         <th>Action</th>
+                        <th>
+                            <button className="theme-toggle" onClick={toggleTheme}>
+                                {isDarkMode ? '☀️' : '🌙'}
+                            </button>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -149,6 +175,7 @@ const UsersTable: React.FC = () => {
                                 <button>Edit</button>
                                 <button onClick={() => handleDelete(user.id)}>Delete</button>
                             </td>
+                            <td></td>
                         </tr>
                     ))}
                 </tbody>

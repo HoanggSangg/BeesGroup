@@ -1,3 +1,41 @@
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --bg-tertiary: #fafafa;
+    --text-primary: #000000;
+    --text-secondary: #2193b0;
+    --border-color: #e0e0e0;
+    --gradient-start: #2193b0;
+    --gradient-end: #6dd5ed;
+    --button-bg: #f8f9fa;
+    --button-text: #2193b0;
+    --button-hover-bg: #2193b0;
+    --button-hover-text: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.1);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --bg-tertiary: #333333;
+    --text-primary: #ffffff;
+    --text-secondary: #6dd5ed;
+    --border-color: #404040;
+    --gradient-start: #2d2d2d;
+    --gradient-end: #404040;
+    --button-bg: #2d2d2d;
+    --button-text: #6dd5ed;
+    --button-hover-bg: #404040;
+    --button-hover-text: #ffffff;
+    --shadow-color: rgba(0, 0, 0, 0.3);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 table {
     width: 100%;
     border-collapse: separate;
@@ -7,18 +45,20 @@ table {
     text-align: left;
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    background: white;
+    box-shadow: 0 4px 15px var(--shadow-color);
+    background: var(--bg-primary);
 }
   
 thead {
-    background: linear-gradient(135deg, #2193b0, #6dd5ed);
-    color: white;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: var(--text-primary);
 }
   
 th, td {
-    padding: 15px;
-    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-primary);
 }
 
 th {
@@ -27,23 +67,23 @@ th {
 }
   
 tbody tr:hover {
-    background-color: #f8f9fa;
+    background-color: var(--bg-secondary);
     transition: background-color 0.3s ease;
 }
   
 tbody tr:nth-child(even) {
-    background-color: #fafafa;
+    background-color: var(--bg-tertiary);
 }
   
 a {
-    color: #2193b0;
+    color: var(--text-secondary);
     text-decoration: none;
     transition: color 0.3s ease;
 }
   
 a:hover {
-    color: #6dd5ed;
-    text-decoration: none;
+    color: var(--text-secondary);
+    opacity: 0.8;
 }
   
 button {
@@ -55,16 +95,16 @@ button {
     cursor: pointer;
     border: none;
     font-weight: 500;
-    background-color: #f8f9fa;
-    color: #2193b0;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    box-shadow: 0 2px 4px var(--shadow-color);
 }
   
 button:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: #2193b0;
-    color: white;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
 }
 
 .length {
@@ -127,6 +167,59 @@ button:hover {
     background-color: rgba(255, 255, 255, 0.3);
     border-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.theme-toggle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    box-shadow: 0 2px 4px var(--shadow-color);
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    background-color: var(--button-hover-bg);
+    color: var(--button-hover-text);
+}
+
+.loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.spinner {
+    width: 70px;
+    height: 70px;
+    border: 4px solid var(--bg-secondary);
+    border-top: 4px solid var(--text-secondary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loading-overlay {
+    position: absolute;
+    top: 300px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(var(--bg-primary-rgb), 0.8);
+    z-index: 1000;
 }
   
   

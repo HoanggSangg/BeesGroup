@@ -1,94 +1,120 @@
 table {
     width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 18px;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 25px 0;
+    font-size: 16px;
     text-align: left;
-    border-radius: 10px;
+    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    background: white;
 }
   
 thead {
-    background-color: #007bff;
+    background: linear-gradient(135deg, #2193b0, #6dd5ed);
     color: white;
 }
   
 th, td {
-    padding: 12px;
-    border-bottom: 1px solid #ddd;
+    padding: 15px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+th {
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }
   
 tbody tr:hover {
-    background-color: #f1f1f1;
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
 }
   
 tbody tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #fafafa;
 }
   
 a {
-    color: #007bff;
+    color: #2193b0;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
   
 a:hover {
-    text-decoration: underline;
+    color: #6dd5ed;
+    text-decoration: none;
 }
   
 button {
-    min-width: 55px;
-    margin: 0 2px;
-    padding: 4px 0;
-    border-radius: 5px;
-    transition: 0.2s;
+    min-width: 60px;
+    margin: 0 3px;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
     cursor: pointer;
+    border: none;
+    font-weight: 500;
+    background-color: #f8f9fa;
+    color: #2193b0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
   
 button:hover {
-    opacity: 0.8;
-    background-color: #007bff;
-    color: #f1f1f1;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #2193b0;
+    color: white;
 }
 
 .page-button {
     margin: 5px;
-    padding: 5px 10px;
+    padding: 8px 16px;
     cursor: pointer;
-    background-color: #ddd;
-    color: black;
+    background-color: #f8f9fa;
+    color: #2193b0;
     border: none;
-    transition: background-color 0.3s, color 0.3s;
-  }
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
   
-  .page-button.active {
-    background-color: #007bff;
+.page-button.active {
+    background: linear-gradient(135deg, #2193b0, #6dd5ed);
     color: white;
-  }
+    box-shadow: 0 4px 8px rgba(33, 147, 176, 0.3);
+}
   
-  .page-button:hover {
-    background-color: #0056b3;
+.page-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #2193b0;
     color: white;
-  }
+}
   
 .sort-button {
-    min-width: 30px;
-    margin-left: 5px;
-    padding: 2px 5px;
+    min-width: 35px;
+    margin-left: 8px;
+    padding: 4px 8px;
     background-color: transparent;
-    border: 1px solid white;
+    border: 1px solid rgba(255, 255, 255, 0.8);
     color: white;
     font-size: 14px;
+    border-radius: 4px;
+    transition: all 0.3s ease;
 }
 
 .sort-button:hover {
     background-color: rgba(255, 255, 255, 0.2);
     color: white;
+    transform: translateY(-1px);
 }
 
 .sort-button.active {
     background-color: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.8);
+    border-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
   
   

@@ -67,6 +67,18 @@ button:hover {
     color: white;
 }
 
+.length {
+    float: left;
+    margin-left: 20px;
+    font-size: 20px;
+}
+
+.page-buttons {
+    float: right;
+    margin-right: 20px;
+    margin-top: -10px;
+}
+
 .page-button {
     margin: 5px;
     padding: 8px 16px;

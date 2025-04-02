@@ -62,7 +62,7 @@ const UsersTable: React.FC = () => {
 
         const sortedUsers = [...users].sort((a, b) => {
             if (field === 'name') {
-                return sortDirection === 'asc' 
+                return sortDirection === 'asc'
                     ? a.name.localeCompare(b.name)
                     : b.name.localeCompare(a.name);
             } else {
@@ -107,8 +107,8 @@ const UsersTable: React.FC = () => {
                     <tr>
                         <th>
                             Name
-                            <button 
-                                onClick={() => handleSort('name')} 
+                            <button
+                                onClick={() => handleSort('name')}
                                 className={`sort-button ${sortField === 'name' ? 'active' : ''}`}
                             >
                                 {sortField === 'name' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
@@ -116,8 +116,8 @@ const UsersTable: React.FC = () => {
                         </th>
                         <th>
                             Balance
-                            <button 
-                                onClick={() => handleSort('balance')} 
+                            <button
+                                onClick={() => handleSort('balance')}
                                 className={`sort-button ${sortField === 'balance' ? 'active' : ''}`}
                             >
                                 {sortField === 'balance' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
@@ -153,20 +153,24 @@ const UsersTable: React.FC = () => {
                     ))}
                 </tbody>
             </table>
-
-            <div>
-                {renderPagination().map((page, index) =>
-                    page === "..." ? (
-                        <span key={index}>...</span>
-                    ) : (
-                        <button
-                            key={index}
-                            onClick={() => setCurrentPage(Number(page))}
-                            className={`page-button ${currentPage === page ? "active" : ""}`}>
-                            {page}
-                        </button>
-                    )
-                )}
+            <div className="page-container">
+                <div className="length">
+                    {users.length} users
+                </div>
+                <div className={`page-buttons`}>
+                    {renderPagination().map((page, index) =>
+                        page === "..." ? (
+                            <span key={index}>...</span>
+                        ) : (
+                            <button
+                                key={index}
+                                onClick={() => setCurrentPage(Number(page))}
+                                className={`page-button ${currentPage === page ? "active" : ""}`}>
+                                {page}
+                            </button>
+                        )
+                    )}
+                </div>
             </div>
         </div>
     );

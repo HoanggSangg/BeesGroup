@@ -28,6 +28,7 @@ const UsersTable: React.FC = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [sortField, setSortField] = useState<SortField>('name');
     const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
+    const [selectedUsers, setSelectedUsers] = useState<string[]>([]);
     const [isDarkMode, setIsDarkMode] = useState(() => {
         const savedTheme = localStorage.getItem('theme');
         return savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -91,12 +92,29 @@ const UsersTable: React.FC = () => {
         setIsDarkMode(prev => !prev);
     };
 
+    const handleSelectAll = (checked: boolean) => {
+        if (checked) {
+            setSelectedUsers(currentUsers.map(user => user.id));
+        } else {
+            setSelectedUsers([]);
+        }
+    };
+
+    const handleSelectUser = (userId: string, checked: boolean) => {
+        if (checked) {
+            setSelectedUsers(prev => [...prev, userId]);
+        } else {
+            setSelectedUsers(prev => prev.filter(id => id !== userId));
+        }
+    };
+
     if (error) return <p>Error: {error}</p>;
 
     const totalPages = Math.ceil(users.length / usersPerPage);
     const indexOfLastUser = currentPage * usersPerPage;
     const indexOfFirstUser = indexOfLastUser - usersPerPage;
     const currentUsers = users.slice(indexOfFirstUser, indexOfLastUser);
+    const isAllSelected = currentUsers.length > 0 && currentUsers.every(user => selectedUsers.includes(user.id));
 
     const renderPagination = () => {
         let pages = [];
@@ -127,11 +145,19 @@ const UsersTable: React.FC = () => {
                 <thead>
                     <tr>
                         <th>
+                            <input 
+                                type="checkbox" 
+                                className="checkbox" 
+                                id="select-all"
+                                checked={isAllSelected}
+                                onChange={(e) => handleSelectAll(e.target.checked)}
+                            />
+                        </th>
+                        <th>
                             Name
                             <button
                                 onClick={() => handleSort('name')}
-                                className={`sort-button ${sortField === 'name' ? 'active' : ''}`}
-                            >
+                                className={`sort-button ${sortField === 'name' ? 'active' : ''}`}>
                                 {sortField === 'name' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
                             </button>
                         </th>
@@ -139,8 +165,7 @@ const UsersTable: React.FC = () => {
                             Balance
                             <button
                                 onClick={() => handleSort('balance')}
-                                className={`sort-button ${sortField === 'balance' ? 'active' : ''}`}
-                            >
+                                className={`sort-button ${sortField === 'balance' ? 'active' : ''}`}>
                                 {sortField === 'balance' ? (sortDirection === 'asc' ? '↑' : '↓') : '↕'}
                             </button>
                         </th>
@@ -158,6 +183,15 @@ const UsersTable: React.FC = () => {
                 <tbody>
                     {currentUsers.map((user) => (
                         <tr key={user.id}>
+                            <td>
+                                <input 
+                                    type="checkbox" 
+                                    className="checkbox" 
+                                    id={`select-user-${user.id}`}
+                                    checked={selectedUsers.includes(user.id)}
+                                    onChange={(e) => handleSelectUser(user.id, e.target.checked)}
+                                />
+                            </td>
                             <td>{user.name}</td>
                             <td>{formatBalance(user.balance)}</td>
                             <td>

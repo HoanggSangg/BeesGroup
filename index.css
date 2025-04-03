@@ -221,5 +221,14 @@ button:hover {
     background: rgba(var(--bg-primary-rgb), 0.8);
     z-index: 1000;
 }
+
+.checkbox {
+    position: relative;
+    height: 20px;
+    width: 20px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
   
   
